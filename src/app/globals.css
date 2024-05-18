@@ -79,4 +79,8 @@
   .bg-selingkuh {
     @apply bg-gradient-to-b from-[#DB4E66] from-10% via-[#A24688] via-30% to-[#4E3ABA] to-80%;
   }
+
+  .border-selingkuh {
+    @apply border-[#DB4E66];
+  }
 }
