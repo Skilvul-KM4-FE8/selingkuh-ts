@@ -1,3 +1,4 @@
+"use client"
 import type { Metadata } from "next";
 import { Poppins as FontSans } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient()
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,17 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning={true}
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        {/* <Navbar /> */}
-        {children}
-        {/* <Footer /> */}
-      </body>
+      <QueryClientProvider client={queryClient}>
+        <body
+          suppressHydrationWarning={true}
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
+          {/* <Navbar /> */}
+          {children}
+          {/* <Footer /> */}
+        </body>
+      </QueryClientProvider>
     </html>
   );
 }
