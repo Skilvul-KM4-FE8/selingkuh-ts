@@ -5,7 +5,7 @@ const Register = () => {
     return (
         <div className="bg-gradient-to-b from-[#DB4E66] from-10% via-[#A24688] via-30% to-[#4E3ABA] to-80%">
             <div className="md:container md:mx-auto px-4 flex justify-center items-center h-screen">
-                <Card className="lg:w-7/12 md:w-screen"> 
+                <Card className="lg:w-7/12 md:w-screen blur"> 
                     <CardHeader>
                         <CardTitle className="text-3xl">Register</CardTitle>
                         <CardDescription>Silahkan Register terlebih dahulu agar kamu bisa chatan dengan selingkuhanmu yaa...</CardDescription>
