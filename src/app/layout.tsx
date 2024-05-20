@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Poppins as FontSans } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: "600",
 });
 
 export const metadata: Metadata = {
