@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @keyframes gradientChange {
+    0% {
+      background-position: 0%;
+    }
+
+    50% {
+      background-position: 100%;
+    }
+
+    100% {
+      background-position: 0%;
+    }
+  }
+
+  .gradient {
+    background: linear-gradient(90deg, blue, red);
+    background-size: 200% 200%;
+  }
+
+  .element-to-rotate {
+    animation: gradientChange 4s ease infinite;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -82,5 +107,9 @@
 
   .border-selingkuh {
     @apply border-[#DB4E66];
+  }
+
+  .btn-selingkuh {
+    @apply border border-white bg-gradient-to-r from-blue-500 to-red-500 text-white px-4 py-2 text-xl rounded font-medium focus:ring ring-black ring-opacity-10 gradient element-to-rotate;
   }
 }
