@@ -53,4 +53,10 @@ export type {
   userUpdateImage,
 };
 
+interface registerUserInterface {
+  username: string;
+  email: string;
+  password: string;
+}
+
 export type { registerUserInterface };
