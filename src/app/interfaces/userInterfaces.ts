@@ -24,6 +24,11 @@ interface userRegister {
   password: string;
 }
 
+interface responseRegister {
+  message: string;
+
+}
+
 interface userUpdate {
   name: string;
   email: string;
@@ -57,6 +62,7 @@ interface registerUserInterface {
   username: string;
   email: string;
   password: string;
+  message?: string;
 }
 
-export type { registerUserInterface };
+export type { registerUserInterface, responseRegister };
