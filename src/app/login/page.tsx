@@ -11,14 +11,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Toaster } from "@/components/ui/sonner";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+
+// ======================================================
 import { userLogin } from "../interfaces/userInterfaces";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "@/api/login";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
+
   const [login, setLogin] = React.useState<userLogin>({
     email: "",
     password: "",
@@ -43,19 +50,21 @@ export default function Page() {
   const handleSubmit = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      alert(data.message);
       console.log({ data });
-      alert(`${data.username} Berhasil Login`);
       resetAccount();
+      toast.success("Login Berhasil");
+      router.push("/dashboard");
     },
     onError: (error: Error) => {
-      alert("Login Gagal: " + error.message);
+      // alert("Login Gagal: " + error.message);
+      toast.error(`Login Gagal: + ${error.message}`);
     },
   });
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-selingkuh">
-      <Card className="w-full max-w-md lg:7/12 md:w-screen mx-5">
+      <Toaster />
+      <Card className="w-full max-w-md lg:7/12 md:w-screen m-5">
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>
@@ -63,7 +72,7 @@ export default function Page() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form className="">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Email</Label>
@@ -87,6 +96,7 @@ export default function Page() {
               </div>
             </div>
             <Button
+              className="my-3"
               onClick={async (e) => {
                 e.preventDefault();
                 handleSubmit.mutateAsync(login);
@@ -95,15 +105,15 @@ export default function Page() {
             >
               Login
             </Button>
-            <p>{handleSubmit.isSuccess ? "Data has been posted" : null}</p>
+            <p>{handleSubmit.isSuccess ? "Logined" : null}</p>
             <p className="text-red-500">
-              {handleSubmit.isError ? "Failed to post data" : null}
+              {handleSubmit.isError ? "Email  atau password anda salah!" : null}
             </p>
           </form>
         </CardContent>
 
         <CardFooter className="grid">
-          <div className="text-slate-700 mt-3 text-sm">
+          <div className="text-slate-700  text-sm">
             Anda Belum punya akun? Silahkan{" "}
             <Link
               href={"/register"}
