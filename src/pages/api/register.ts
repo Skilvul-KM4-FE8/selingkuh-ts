@@ -22,8 +22,8 @@ export default async function handleRegister(req: NextApiRequest, res: NextApiRe
 
     
     if (req.method === "POST") {
-        const { name, email, password, image } = req.body;
-        console.log({name}, {email}, {password}, {image})
+        const { name, email, password} = req.body;
+        console.log({name}, {email}, {password})
         // res.status(200).json({ name, email, password });
         genSalt(10)
             .then(salt => hash(password, salt))
@@ -34,7 +34,7 @@ export default async function handleRegister(req: NextApiRequest, res: NextApiRe
                             name: name,
                             email: email,
                             password: hashedPassword,
-                            image: "ini gambar"
+                            image: "https://banner2.cleanpng.com/20180331/khw/kisspng-computer-icons-user-clip-art-user-5abf13d4b67e20.4808850915224718927475.jpg"
                         }
                     })
                     // console.log("=======================================")

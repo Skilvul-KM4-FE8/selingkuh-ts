@@ -11,7 +11,6 @@ export const registerUser = async (account: registerUserInterface) => {
       name: account.username,
       email: account.email,
       password: account.password,
-      image: "ini gambar"
     }),
   });
 

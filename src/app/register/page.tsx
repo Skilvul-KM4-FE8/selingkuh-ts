@@ -97,7 +97,7 @@ const Register:FC = () => {
     return (
         <div className="bg-gradient-to-b from-[#DB4E66] from-10% via-[#A24688] via-30% to-[#4E3ABA] to-80%">
             <div className="md:container md:mx-auto px-4 flex justify-center items-center h-screen">
-                <Card className="lg:w-7/12 md:w-screen"> 
+                <Card className="lg:w-6/12 sm:w-screen p-2"> 
                     <CardHeader>
                         <CardTitle className="text-3xl">Register</CardTitle>
                         <CardDescription>Silahkan Register terlebih dahulu agar kamu bisa chatan dengan selingkuhanmu yaa...</CardDescription>
@@ -120,8 +120,8 @@ const Register:FC = () => {
                                 {/* <input type="password" placeholder="Masukkan Password kamu" onChange={e => handleChange(e)} name="password" className="border border-slate-400 px-2 py-2 rounded-md" /> */}
                             </div>
                             <p className="text-slate-700">Sudah punya akun? Silahkan <Link href={"/login"} className="text-rose-900 hover:font-bold hover:text-blue-800 hover:underline"> Login.</Link></p>
-                            <Button className="mt-3 px-7" onClick={async (e) => {e.preventDefault(); handleSubmit.mutateAsync(account)}} disabled={handleSubmit.isPending} >Daftar</Button>
-                            <p>{ handleSubmit.isSuccess ? 'Data has been posted' : null }</p>
+                            <Button className="mt-3 px-7 w-full" onClick={async (e) => {e.preventDefault(); handleSubmit.mutateAsync(account)}} disabled={handleSubmit.isPending} >Daftar</Button>
+                            <p>{ handleSubmit.isSuccess ? 'Register Sukses' : null }</p>
                             <p className="text-red-500">{ handleSubmit.isError ? 'Failed to post data' : null }</p>
                         </form>
                     </CardContent>
