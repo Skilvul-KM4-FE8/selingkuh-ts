@@ -9,19 +9,21 @@ interface user {
   updated_at: string;
 }
 
-interface registerUserInterface {
-  username: string;
-}
-
 interface userLogin {
   email: string;
   password: string;
+  username: string;
+  message?: string;
 }
 
 interface userRegister {
   name: string;
   email: string;
   password: string;
+}
+
+interface responseRegister {
+  message: string;
 }
 
 interface userUpdate {
@@ -57,6 +59,7 @@ interface registerUserInterface {
   username: string;
   email: string;
   password: string;
+  message?: string;
 }
 
-export type { registerUserInterface };
+export type { registerUserInterface, responseRegister };
