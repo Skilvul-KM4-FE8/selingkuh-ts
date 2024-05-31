@@ -64,12 +64,12 @@ export default function Page() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-selingkuh">
       <Toaster />
-      <Card className="w-full max-w-md lg:7/12 md:w-screen m-5">
+      <div className="w-full max-w-md lg:7/12 md:w-screen">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-white">Login</CardTitle>
+          <div className="text-white">
             Login dulu yuk sebelum memulai chat dengan selingkuhan kamu
-          </CardDescription>
+          </div>
         </CardHeader>
         <CardContent>
           <form className="">
@@ -96,7 +96,7 @@ export default function Page() {
               </div>
             </div>
             <Button
-              className="my-3"
+              className="my-3 w-full md:w-auto "
               onClick={async (e) => {
                 e.preventDefault();
                 handleSubmit.mutateAsync(login);
@@ -113,18 +113,18 @@ export default function Page() {
         </CardContent>
 
         <CardFooter className="grid">
-          <div className="text-slate-700  text-sm">
+          <div className="text-white  text-sm">
             Anda Belum punya akun? Silahkan{" "}
             <Link
               href={"/register"}
-              className="text-rose-900 hover:font-bold hover:text-blue-800 hover:underline text-sm underline"
+              className="text-blue-100 hover:font-bold hover:text-blue-300 hover:underline text-sm underline"
             >
               {" "}
               Register.
             </Link>
           </div>
         </CardFooter>
-      </Card>
+      </div>
     </div>
   );
 }
