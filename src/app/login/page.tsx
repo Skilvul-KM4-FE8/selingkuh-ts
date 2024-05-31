@@ -106,7 +106,7 @@ export default function Page() {
               Login
             </Button>
             <p>{handleSubmit.isSuccess ? "Logined" : null}</p>
-            <p className="text-red-500">
+            <p className="text-slate-100">
               {handleSubmit.isError ? "Email  atau password anda salah!" : null}
             </p>
           </form>
