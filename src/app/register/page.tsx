@@ -7,6 +7,8 @@ import { registerUserInterface, responseRegister } from "../interfaces/userInter
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/api/register";
 import { stringify } from "querystring";
+import Image from "next/image";
+import selingkuhLogo from "./../../images/selingkuh_logo.png"
 
 
 const Register:FC = () => {
@@ -16,6 +18,8 @@ const Register:FC = () => {
         password: "",
         email: "",
     });
+
+    const [check, setCheck] = useState<boolean>(false);
 
     // const newAccount = {
     //     username: account.username,
@@ -56,6 +60,10 @@ const Register:FC = () => {
     
     }) 
 
+    const handleCheck = ()=> {
+        setCheck(!check)
+    }
+
     // const registerUserDirect = async (account: registerUserInterface) => {
     //     try {
     //       const response = await fetch("/api/register", {
@@ -95,37 +103,39 @@ const Register:FC = () => {
 
 
     return (
-        <div className="bg-gradient-to-b from-[#DB4E66] from-10% via-[#A24688] via-30% to-[#4E3ABA] to-80%">
-            <div className="md:container md:mx-auto px-4 flex justify-center items-center h-screen">
-                <Card className="lg:w-6/12 sm:w-screen p-2"> 
-                    <CardHeader>
-                        <CardTitle className="text-3xl">Register</CardTitle>
-                        <CardDescription>Silahkan Register terlebih dahulu agar kamu bisa chatan dengan selingkuhanmu yaa...</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <form>
-                            <div className="flex gap-2 flex-col mb-2">
-                                <p className="font-medium">Nama</p>
-                                {/* <input type="text" placeholder="Masukkan Username kamu" onChange={e => handleChange(e)} name="username" className="border border-slate-400 px-2 py-2 rounded-md" /> */}
-                                <input type="text" placeholder="Masukkan Username kamu" onChange={e => handleChange(e)} value={account.username} name="username" className="border border-slate-400 px-2 py-2 rounded-md" />
+        <div className="bg-selingkuh-dark w-screen">
+            <div className="flex justify-center items-center h-screen flex-col ">
+                <div className="h-1/4 flex justify-center items-center sm:w-screen">
+                    {/* <div className=""> */}
+                        <Image src={selingkuhLogo} alt="Selingkuh Logo" width={50} height={50} />
+                        <p className="text-white font-inter fw-semibold text-[30px]">SELINGKUH</p>
+                    {/* </div> */}
+                {/* <img src="/src/images/selingkuh_logo.png" alt="" className="w-5 h-5"/> */}
+                </div>
+
+                <div className="inline-block w-screen p-6 sm:w-screen">
+                    <form>
+                        <div className="font-inter mb-5">
+                            <p className="font-extrabold text-white text-2xl">Register</p>
+                            <p className="text-white">Create your own account now!</p>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <input type="text" placeholder="Username" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
+                            <input type="email" placeholder="Email" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
+                            <input type="password" placeholder="Password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
+                            <input type="password" placeholder="Confirm Password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
+                            <label className="text-white" htmlFor="accept_terms"><input type="checkbox" className="me-3 leading-3 border-0" name="accept_terms" id="accept_terms" onClick={handleCheck} />Accept terms and condition</label>
+                            {/* <p className="text-white">{check.toString()}</p> */}
+                            <button className="text-white font-extrabold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark">Register</button>
+                            <div>
+                                <p className="font-inter text-white text-center">Already registered? Login</p>
                             </div>
-                            <div className="flex gap-2 flex-col mb-2">
-                                <p className="font-medium">Email</p>
-                                {/* <input type="email" placeholder="Masukkan Email kamu" onChange={e => handleChange(e)} name="email"  className="border border-slate-400 px-2 py-2 rounded-md" /> */}
-                                <input type="email" placeholder="Masukkan Email kamu" onChange={e => handleChange(e)} value={account.email} name="email"  className="border border-slate-400 px-2 py-2 rounded-md" />
-                            </div>
-                            <div className="flex gap-2 flex-col mb-2">
-                                <p className="font-medium">Password</p>
-                                <input type="password" placeholder="Masukkan Password kamu" onChange={e => handleChange(e)} value={account.password} name="password" className="border border-slate-400 px-2 py-2 rounded-md" />
-                                {/* <input type="password" placeholder="Masukkan Password kamu" onChange={e => handleChange(e)} name="password" className="border border-slate-400 px-2 py-2 rounded-md" /> */}
-                            </div>
-                            <p className="text-slate-700">Sudah punya akun? Silahkan <Link href={"/login"} className="text-rose-900 hover:font-bold hover:text-blue-800 hover:underline"> Login.</Link></p>
-                            <Button className="mt-3 px-7 w-full" onClick={async (e) => {e.preventDefault(); handleSubmit.mutateAsync(account)}} disabled={handleSubmit.isPending} >Daftar</Button>
-                            <p>{ handleSubmit.isSuccess ? 'Register Sukses' : null }</p>
-                            <p className="text-red-500">{ handleSubmit.isError ? 'Failed to post data' : null }</p>
-                        </form>
-                    </CardContent>
-                </Card>
+                        </div>
+                    </form>
+                </div>
+                
+
+                
             </div>
         </div>
     )
