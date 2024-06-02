@@ -6,8 +6,8 @@ import { compareSync, genSalt, hash } from "bcrypt-ts";
 // import bcrypt from "bcrypt"
 // const bcrypt = require("bcrypt")
 
-
 const libsql = createClient({
+
     url: `${process.env.TURSO_DATABASE_URL}`,
     authToken: `${process.env.TURSO_AUTH_TOKEN}`,
 
@@ -52,3 +52,4 @@ export default async function handleRegister(req: NextApiRequest, res: NextApiRe
         res.status(405).json({message: "Method Not Allowed"})
     }
 }
+

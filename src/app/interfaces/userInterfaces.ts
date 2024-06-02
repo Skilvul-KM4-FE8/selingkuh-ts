@@ -9,13 +9,11 @@ interface user {
   updated_at: string;
 }
 
-interface registerUserInterface {
-  username: string;
-}
-
 interface userLogin {
   email: string;
   password: string;
+  username: string;
+  message?: string;
 }
 
 interface userRegister {
@@ -26,7 +24,6 @@ interface userRegister {
 
 interface responseRegister {
   message: string;
-
 }
 
 interface userUpdate {

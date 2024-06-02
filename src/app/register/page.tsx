@@ -1,24 +1,46 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 import React, { FC, useState } from "react";
-import { registerUserInterface, responseRegister } from "../interfaces/userInterfaces";
+import {
+  registerUserInterface,
+  responseRegister,
+} from "../interfaces/userInterfaces";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/api/register";
 import { stringify } from "querystring";
 import Image from "next/image";
 import selingkuhLogo from "./../../images/selingkuh_logo.png"
 
+const Register: FC = () => {
 
-const Register:FC = () => {
+  // const newAccount = {
+  //     username: account.username,
+  //     email: account.email,
+  //     password: account.password
+  // }
 
     const [account, setAccount] = useState<registerUserInterface>({
         username: "",
         password: "",
         re_password: "",
         email: "",
+
     });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
+  };
 
     const [check, setCheck] = useState<boolean>(false);
 
@@ -28,12 +50,6 @@ const Register:FC = () => {
     //     password: account.password
     // }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setAccount({
-            ...account,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const resetAccount = () => {
         setAccount({
@@ -44,9 +60,29 @@ const Register:FC = () => {
         })
     }
 
-    // console.log(account)
+  // console.log(account)
 
-    // const handleSubmit = useMutation(registerUser)
+  // const handleSubmit = useMutation(registerUser)
+
+
+
+  // const registerUserDirect = async (account: registerUserInterface) => {
+  //     try {
+  //       const response = await fetch("/api/register", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json"
+  //         },
+  //         body: JSON.stringify({
+  //           name: account.username,
+  //           email: account.email,
+  //           password: account.password,
+  //         })
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error("Gagal mendaftar pengguna");
+  //       }
 
     const handleSubmit = useMutation({
         mutationFn: registerUser,
@@ -93,15 +129,23 @@ const Register:FC = () => {
     //     }
     //   }
 
-    // const handleSubmit = useMutation({
-    //     mutationFn: registerUserDirect,
-    //     onSuccess: () => {
-    //         alert("Registrasi Berhasil");
-    //     },
-    //     onError: (error: Error) => {
-    //         alert("Registrasi Gagal: " + error.message);
-    //     }
-    // });
+
+  //       return data;
+  //     } catch (error:any) {
+  //       // Tangani kesalahan dengan melemparkannya kembali untuk ditangani oleh hook pemanggil
+  //       throw new Error("Gagal mendaftar pengguna: " + error.message);
+  //     }
+  //   }
+
+  // const handleSubmit = useMutation({
+  //     mutationFn: registerUserDirect,
+  //     onSuccess: () => {
+  //         alert("Registrasi Berhasil");
+  //     },
+  //     onError: (error: Error) => {
+  //         alert("Registrasi Gagal: " + error.message);
+  //     }
+  // });
 
 
     return (
@@ -140,5 +184,6 @@ const Register:FC = () => {
         </div>
     )
 }
+
 
 export default Register;
