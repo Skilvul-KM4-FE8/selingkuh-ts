@@ -63,6 +63,7 @@ interface registerUserInterface {
   email: string;
   password: string;
   message?: string;
+  re_password: string;
 }
 
 export type { registerUserInterface, responseRegister };
