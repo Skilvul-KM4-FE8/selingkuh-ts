@@ -20,17 +20,20 @@ import Image from "next/image";
 import selingkuhLogo from "./../../images/selingkuh_logo.png"
 
 const Register: FC = () => {
-  const [account, setAccount] = useState<registerUserInterface>({
-    username: "",
-    password: "",
-    email: "",
-  });
 
   // const newAccount = {
   //     username: account.username,
   //     email: account.email,
   //     password: account.password
   // }
+
+    const [account, setAccount] = useState<registerUserInterface>({
+        username: "",
+        password: "",
+        re_password: "",
+        email: "",
+
+    });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
@@ -47,31 +50,21 @@ const Register: FC = () => {
     //     password: account.password
     // }
 
-  const resetAccount = () => {
-    setAccount({
-      username: "",
-      password: "",
-      email: "",
-    });
-  };
 
+    const resetAccount = () => {
+        setAccount({
+            username: "",
+            password: "",
+            email: "",
+            re_password: ""
+        })
+    }
 
   // console.log(account)
 
   // const handleSubmit = useMutation(registerUser)
 
-  const handleSubmit = useMutation({
-    mutationFn: registerUser,
-    onSuccess: (data) => {
-      alert(data.message);
-      console.log({ data });
-      // alert("Registrasi Berhasil");
-      resetAccount();
-    },
-    onError: (error: Error) => {
-      alert("Registrasi Gagal: " + error.message);
-    },
-  });
+
 
   // const registerUserDirect = async (account: registerUserInterface) => {
   //     try {
@@ -91,6 +84,19 @@ const Register: FC = () => {
   //         throw new Error("Gagal mendaftar pengguna");
   //       }
 
+    const handleSubmit = useMutation({
+        mutationFn: registerUser,
+        onSuccess: (data:any) => {
+            alert(data.message)
+            console.log({data})
+            // alert("Registrasi Berhasil");
+            resetAccount()
+        },
+        onError: (error: Error) => {
+            alert("Registrasi Gagal: " + error.message);
+        }
+    
+    }) 
 
     const handleCheck = ()=> {
         setCheck(!check)
@@ -153,29 +159,27 @@ const Register: FC = () => {
                 {/* <img src="/src/images/selingkuh_logo.png" alt="" className="w-5 h-5"/> */}
                 </div>
 
-                <div className="inline-block w-screen p-6 sm:w-screen">
+                <div className="inline-block w-screen px-6 sm:w-screen">
                     <form>
                         <div className="font-inter mb-5">
                             <p className="font-extrabold text-white text-2xl">Register</p>
                             <p className="text-white">Create your own account now!</p>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <input type="text" placeholder="Username" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
-                            <input type="email" placeholder="Email" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
-                            <input type="password" placeholder="Password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
-                            <input type="password" placeholder="Confirm Password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" />
+                            <input type="text" placeholder="Username" name="username" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.username} onChange={e => handleChange(e)} />
+                            <input type="email" placeholder="Email" name="email" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.email} onChange={e => handleChange(e)} />
+                            <input type="password" placeholder="Password" name="password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.password} onChange={e => handleChange(e)}/>
+                            <input type="password" placeholder="Confirm Password" name="re_password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.re_password} onChange={e => handleChange(e)}/>
+                            { (account.password !== account.re_password) ? <p className="text-red-500">Password doesn't match</p> : null}
                             <label className="text-white" htmlFor="accept_terms"><input type="checkbox" className="me-3 leading-3 border-0" name="accept_terms" id="accept_terms" onClick={handleCheck} />Accept terms and condition</label>
-                            {/* <p className="text-white">{check.toString()}</p> */}
-                            <button className="text-white font-extrabold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark">Register</button>
+                            <button onClick={async e =>{e.preventDefault(); handleSubmit.mutateAsync(account)} } disabled={handleSubmit.isPending} className="text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark">Register</button>
                             <div>
-                                <p className="font-inter text-white text-center">Already registered? Login</p>
+                                <p className="font-inter text-white text-center">Already registered? <Link className="font-extrabold" href={"/login"}>Login</Link></p>
                             </div>
                         </div>
                     </form>
                 </div>
-                
 
-                
             </div>
         </div>
     )
