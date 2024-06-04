@@ -1,0 +1,13 @@
+{
+    "builds": [
+      {
+        "src": "next.config.js",
+        "use": "@vercel/next"
+      }
+    ],
+    "env": {
+      "TURSO_DATABASE_URL": "@turso_database_url",
+      "TURSO_AUTH_TOKEN": "@turso_auth_token"
+    }
+  }
+  
