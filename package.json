@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.0.4",
     "@libsql/client": "^0.6.0",
     "@prisma/adapter-libsql": "^5.14.0",
     "@prisma/client": "5.14.0",
@@ -22,6 +23,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "css-loader": "^7.1.1",
+    "heroicons": "^2.1.3",
     "lucide-react": "^0.383.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
