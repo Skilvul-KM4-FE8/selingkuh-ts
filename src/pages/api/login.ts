@@ -20,7 +20,7 @@ export default async function handleLogin(
     const { email, password } = req.body;
     console.log({ email }, { password });
 
-    const user = await prisma.user?.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email: email,
       },
@@ -31,14 +31,25 @@ export default async function handleLogin(
         image: true,
       },
     });
+    // if (compareSync(password, user.password)) {
+    //   res.status(200).json({ message: "User Found", user });
+    // } else {
+    //   if (!user) {
+    //     res.status(404).json({ message: "User not found" });
+    //   } else {
+    //     res.status(401).json({ message: "Invalid password" });
+    //   }
+    // }
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
     if (compareSync(password, user.password)) {
       res.status(200).json({ message: "User Found", user });
     } else {
-      if (!user) {
-        res.status(404).json({ message: "User not found" });
-      } else {
-        res.status(401).json({ message: "Invalid password" });
-      }
+      res.status(401).json({ message: "Invalid password" });
     }
   } else {
     res.status(405).json({ message: "Method Not Allowed" });
