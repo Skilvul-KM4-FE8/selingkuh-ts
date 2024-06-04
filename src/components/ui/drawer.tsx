@@ -1,7 +1,7 @@
 // ../ui/drawer.tsx
 import React, { ReactNode } from "react";
 import { Dialog } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/solid";
+// import { XIcon } from "@heroicons/react/solid";
 
 interface DrawerProps {
   open: boolean;
@@ -42,7 +42,7 @@ export const DrawerCloseButton: React.FC<{ onClose: () => void }> = ({
 }) => {
   return (
     <button onClick={onClose} className="text-white">
-      <XIcon className="h-6 w-6" />
+      {/* <XIcon className="h-6 w-6" /> */}
     </button>
   );
 };
