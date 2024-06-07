@@ -18,6 +18,7 @@ import { registerUser } from "@/api/register";
 import { stringify } from "querystring";
 import Image from "next/image";
 import selingkuhLogo from "./../../images/selingkuh_logo.png"
+import Swal from "sweetalert2";
 
 const Register: FC = () => {
 
@@ -87,15 +88,24 @@ const Register: FC = () => {
     const handleSubmit = useMutation({
         mutationFn: registerUser,
         onSuccess: (data:any) => {
-            alert(data.message)
+            Swal.fire({
+                title: "Success!",
+                text: data.message,
+                icon: "success"
+            })
+            // alert(data.message)
             console.log({data})
             // alert("Registrasi Berhasil");
             resetAccount()
         },
-        onError: (error: Error) => {
-            alert("Registrasi Gagal: " + error.message);
+        onError: (error: any) => {
+            const errorMessage = error.response?.data?.message || "Registration failed";
+            Swal.fire({
+                title: "Error",
+                text: errorMessage,
+                icon: "error"
+            });
         },
-    
     }) 
 
 
@@ -148,6 +158,11 @@ const Register: FC = () => {
   //     }
   // });
 
+    const isNull = account.username.length == 0 || account.email.length == 0 || account.password.length == 0
+    
+    const btnRegisClass = isNull ? "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark cursor-not-allowed" : "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark"
+    // console.log({isNull})
+
 
     return (
         <div className="bg-selingkuh-dark w-screen">
@@ -188,13 +203,22 @@ const Register: FC = () => {
                             <p className="text-white">Create your own account now!</p>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <input type="text" placeholder="Username" name="username" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.username} onChange={e => handleChange(e)} />
-                            <input type="email" placeholder="Email" name="email" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.email} onChange={e => handleChange(e)} />
-                            <input type="password" placeholder="Password" name="password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.password} onChange={e => handleChange(e)}/>
-                            <input type="password" placeholder="Confirm Password" name="re_password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.re_password} onChange={e => handleChange(e)}/>
+                            <input required type="text" placeholder="Username" name="username" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.username} onChange={e => handleChange(e)} />
+                            <input required type="email" placeholder="Email" name="email" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.email} onChange={e => handleChange(e)} />
+                            <input required type="password" placeholder="Password" name="password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.password} onChange={e => handleChange(e)}/>
+                            <input required type="password" placeholder="Confirm Password" name="re_password" className="px-3 py-2 rounded-lg border-2 text-slate-100 placeholder:text-slate-100 border-[#CBD5E1] bg-slate-100 bg-opacity-50" value={account.re_password} onChange={e => handleChange(e)}/>
                             { (account.password !== account.re_password) ? <p className="text-red-500">Password doesn't match</p> : null}
                             <label className="text-white" htmlFor="accept_terms"><input type="checkbox" className="me-3 leading-3 border-0" name="accept_terms" id="accept_terms" onClick={handleCheck} />Accept terms and condition</label>
-                            <button onClick={async e =>{e.preventDefault(); handleSubmit.mutateAsync(account)} } disabled={handleSubmit.isPending} className="text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark">Register</button>
+                            <button onClick={async e =>{e.preventDefault(); handleSubmit.mutateAsync(account)} } disabled={handleSubmit.isPending || isNull} className={btnRegisClass}>
+                                {handleSubmit.isPending ? 
+                                    (<svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v)C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.939l3-2.647z"></path>
+                                    </svg>)  
+                                    : null
+                                }
+                                Register
+                            </button>
                             <div>
                                 <p className="font-inter text-white text-center">Already registered? <Link className="font-extrabold" href={"/login"}>Login</Link></p>
                             </div>
