@@ -33,6 +33,7 @@
     "react-dom": "^18",
     "sonner": "^1.4.41",
     "sqlite3": "^5.1.7",
+    "sweetalert2": "^11.11.1",
     "tailwind": "^4.0.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
