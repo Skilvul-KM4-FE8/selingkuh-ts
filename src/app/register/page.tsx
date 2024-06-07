@@ -94,9 +94,10 @@ const Register: FC = () => {
         },
         onError: (error: Error) => {
             alert("Registrasi Gagal: " + error.message);
-        }
+        },
     
     }) 
+
 
     const handleCheck = ()=> {
         setCheck(!check)
@@ -150,16 +151,37 @@ const Register: FC = () => {
 
     return (
         <div className="bg-selingkuh-dark w-screen">
+            {handleSubmit.isPending ? (<div className="z-10 bg-slate-950 bg-opacity-90 absolute flex justify-center items-center top-0 bottom-0 left-0 right-0 w-screen h-screen">
+                <div className="font-extrabold text-white text-5xl animate-pulse flex">
+                    L
+                    {/* <svg className="right-10 animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v)C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.939l3-2.647z"></path>
+                    </svg>  */}
+                    <p className="animate-spin">O</p>
+                    ading
+                    <p className="animate-bounce">...</p>
+                </div>
+                {/* <button className="bg-indigo-500 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                    <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v)C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.939l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                </button> */}
+            </div>) : null }
+            
+        
             <div className="flex justify-center items-center h-screen flex-col ">
-                <div className="h-1/4 flex justify-center items-center sm:w-screen">
+                <div className="h-1/4  flex justify-center items-center w-screen">
                     {/* <div className=""> */}
-                        <Image src={selingkuhLogo} alt="Selingkuh Logo" width={50} height={50} />
-                        <p className="text-white font-inter fw-semibold text-[30px]">SELINGKUH</p>
+                        <Image src={selingkuhLogo} alt="Selingkuh Logo" className="w-[50px] sm:w-[70px] md:w-[80px] lg:w-[90px] " />
+                        <p className="text-white font-inter fw-semibold text-[30px] md:text-[40px] lg:text-[50px]">SELINGKUH</p>
                     {/* </div> */}
                 {/* <img src="/src/images/selingkuh_logo.png" alt="" className="w-5 h-5"/> */}
                 </div>
 
-                <div className="inline-block w-screen px-6 sm:w-screen">
+                <div className="inline-block w-screen px-6 sm:w-screen md:w-9/12 lg:w-4/12 ">
                     <form>
                         <div className="font-inter mb-5">
                             <p className="font-extrabold text-white text-2xl">Register</p>
@@ -179,6 +201,8 @@ const Register: FC = () => {
                         </div>
                     </form>
                 </div>
+
+                
 
             </div>
         </div>
