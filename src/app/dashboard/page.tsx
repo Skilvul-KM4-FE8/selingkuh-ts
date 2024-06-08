@@ -1,7 +1,14 @@
+import Navbar from "@/components/layout/Navbar";
+
 export default function Page() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <aside>
+          <div>icon</div>
+        </aside>
+      </div>
+    </>
   );
 }
