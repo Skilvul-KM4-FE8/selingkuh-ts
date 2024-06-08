@@ -62,12 +62,14 @@ export default function Page() {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-selingkuh">
+    <div className="flex items-center justify-center min-h-screen bg-selingkuh-dark">
       <Toaster />
       <div className="w-full max-w-md lg:7/12 md:w-screen">
         <CardHeader>
-          <CardTitle className="text-white">Login</CardTitle>
-          <div className="text-white">
+          <CardTitle className="font-extrabold text-white text-2xl">
+            Login
+          </CardTitle>
+          <div className="text-white text-sm">
             Login dulu yuk sebelum memulai chat dengan selingkuhan kamu
           </div>
         </CardHeader>
@@ -75,7 +77,9 @@ export default function Page() {
           <form className="">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Email</Label>
+                <Label className="text-white" htmlFor="name">
+                  Email
+                </Label>
                 <Input
                   type="email"
                   placeholder="Masukkan Email kamu"
@@ -85,7 +89,9 @@ export default function Page() {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">Password</Label>
+                <Label className="text-white" htmlFor="password">
+                  Password
+                </Label>
                 <Input
                   type="password"
                   placeholder="Masukkan Password kamu"
@@ -96,7 +102,7 @@ export default function Page() {
               </div>
             </div>
             <Button
-              className="my-3 w-full md:w-auto "
+              className="my-3 w-full md:w-auto text-white btn-selingkuh-dark hover:bg-selingkuh-dark-500"
               onClick={async (e) => {
                 e.preventDefault();
                 handleSubmit.mutateAsync(login);
