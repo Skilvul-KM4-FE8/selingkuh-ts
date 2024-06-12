@@ -54,7 +54,8 @@ const MessageTest: FC = () => {
     };
   }, [socket]);
 
-  const sendMessage = () => {
+  const sendMessage = (e: any) => {
+    e.preventDefault();
     mutation.mutate(message);
     setMessage("");
   };
@@ -70,14 +71,16 @@ const MessageTest: FC = () => {
             </div>
           ))}
         </div>
-        <div className="input-message w-full p-3 bg-white border-t-2 border-indigo-500">
-          <div className="flex w-full">
-            <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} className="rounded-l-lg border-indigo-500 border-2 w-full py-2 px-4 focus:outline-none focus:border-blue-500" placeholder="Type a message..." />
-            <button onClick={sendMessage} className="bg-indigo-500 text-white rounded-r-lg px-4 py-2 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-              Send
-            </button>
+        <form onSubmit={sendMessage}>
+          <div className="input-message w-full p-3 bg-white border-t-2 border-indigo-500">
+            <div className="flex w-full">
+              <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} className="rounded-l-lg border-indigo-500 border-2 w-full py-2 px-4 focus:outline-none focus:border-blue-500" placeholder="Type a message..." />
+              <button onClick={sendMessage} className="bg-indigo-500 text-white rounded-r-lg px-4 py-2 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                Send
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
