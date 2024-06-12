@@ -22,7 +22,7 @@ export default async function message(req: NextApiRequest, res: NextApiResponse)
     // console.log("================gt]-/==================")
     // console.log(res.socket.server.io)
     // console.log("================gt]-/==================")
-    if (req.socket && !(req as any).socket.server.io) {
+    if (!(req as any).socket.server.io) {
         console.log("Socket is initializing")
         const httpServer: SocketServer = (req as any).socket.server as SocketServer
         const io = new IOServer(httpServer, {
