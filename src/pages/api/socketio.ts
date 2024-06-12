@@ -19,13 +19,20 @@ const adapter = new PrismaLibSQL(libsql)
 const prisma = new PrismaClient({adapter})
 
 export default async function message(req: NextApiRequest, res: NextApiResponse) {
-    if (!res.socket.server.io) {
+    // console.log("================gt]-/==================")
+    // console.log(res.socket.server.io)
+    // console.log("================gt]-/==================")
+    if (req.socket && !(req as any).socket.server.io) {
         console.log("Socket is initializing")
-        const httpServer: SocketServer = res.socket.server as SocketServer
+        const httpServer: SocketServer = (req as any).socket.server as SocketServer
         const io = new IOServer(httpServer, {
             path: "/api/socketio"
         })
         httpServer.io = io
+
+        // console.log("================gt]-/==================")
+        // console.log((req as any).socket.server.io)
+        // console.log("================gt]-/==================")
 
         io.on("connection", (socket: Socket) => {
             console.log("A user connected")
@@ -41,7 +48,7 @@ export default async function message(req: NextApiRequest, res: NextApiResponse)
                             roomId: 1
                         }
                     })
-                    console.log(newMessage)
+                    // console.log(newMessage)
                     io.emit("message", newMessage)
                 } catch (error) {
                     console.error(error)
