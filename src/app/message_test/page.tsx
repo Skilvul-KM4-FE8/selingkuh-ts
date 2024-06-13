@@ -62,8 +62,8 @@ const MessageTest: FC = () => {
     setMessage("");
   };
 
-  return (
-    <div className="container-screen py-5 min-h-screen bg-gray-100 flex justify-center items-center">
+  return (    <div className="container-screen py-5 min-h-screen bg-gray-100 flex justify-center items-center">
+
       <div className="container mx-auto border-indigo-500 border-2 rounded-lg bg-white shadow-lg flex flex-col h-[80vh] w-full max-w-2xl">
         <p className="text-xl py-5 text-center font-bold">Chat Test</p>
         <div className="chat-container flex flex-col flex-grow overflow-y-auto p-5">
