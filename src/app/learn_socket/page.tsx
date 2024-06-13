@@ -3,7 +3,7 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { io } from "socket.io-client";
 
 const LearnSocket: FC = () => {
-  const socket = useMemo(() => io({ path: "/api/learnsocket" }), []);
+  const socket = useMemo(() => io({ path: "/api/learnsocket", addTrailingSlash:false }), []);
   const [message, setMessage] = useState<string>("");
   const [allChats, setAllChats] = useState<string[]>([]);
 
