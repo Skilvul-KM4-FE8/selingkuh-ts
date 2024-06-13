@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { useMemo } from "react";
 
 const MessageTest: FC = () => {
-  const socket = useMemo(() => io({ path: "/api/socketio" }), []);
+  const socket = useMemo(() => io({ path: "/api/socket" }), []);
   const [message, setMessage] = useState<string>("");
 
   const queryClient = useQueryClient();
@@ -56,8 +56,8 @@ const MessageTest: FC = () => {
 
   const sendMessage = (e: any) => {
     e.preventDefault();
-    // mutation.mutate(message);
-    socket.emit("message", message);
+    mutation.mutate(message);
+    // socket.emit("message", message);
 
     setMessage("");
   };
