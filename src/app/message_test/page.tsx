@@ -56,7 +56,9 @@ const MessageTest: FC = () => {
 
   const sendMessage = (e: any) => {
     e.preventDefault();
-    mutation.mutate(message);
+    // mutation.mutate(message);
+    socket.emit("message", message);
+
     setMessage("");
   };
 
