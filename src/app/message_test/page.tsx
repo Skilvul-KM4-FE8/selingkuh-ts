@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { useMemo } from "react";
 
 const MessageTest: FC = () => {
-  const socket = useMemo(() => io({ path: "/api/socket" }), []);
+  const socket = useMemo(() => io({ path: "/api/socket", addTrailingSlash:false }), []);
   const [message, setMessage] = useState<string>("");
 
   const queryClient = useQueryClient();

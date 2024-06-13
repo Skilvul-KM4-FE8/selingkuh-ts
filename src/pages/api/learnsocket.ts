@@ -22,7 +22,8 @@ export default async function learnSocket(req: NextApiRequest, res: NextApiRespo
         console.log("Learn Socket is initializing")
         const httpServer: SocketServer = (req as any).socket.server as SocketServer
         const io = new IOServer(httpServer, {
-            path: "/api/learnsocket"
+            path: "/api/learnsocket", 
+            addTrailingSlash:false
         })
         httpServer.io = io
 
