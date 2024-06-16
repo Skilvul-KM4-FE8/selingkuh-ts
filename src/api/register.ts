@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { registerUserInterface } from "@/app/interfaces/userInterfaces";
 
 export const registerUser = async (account: registerUserInterface) => {
@@ -11,9 +11,13 @@ export const registerUser = async (account: registerUserInterface) => {
       name: account.username,
       email: account.email,
       password: account.password,
-      image: "ini gambar",
     }),
   });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to register user");
+  }
 
   const data: registerUserInterface = await response.json();
 
