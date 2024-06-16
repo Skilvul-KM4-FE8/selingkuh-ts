@@ -114,11 +114,11 @@ const Register: FC = () => {
 
       <div className="flex justify-center items-center h-screen flex-col">
         <div className="h-1/4 flex justify-center items-center w-screen">
-          <Image
-            src={selingkuhLogo}
+          {/* <Image
+            // src={selingkuhLogo}
             alt="Selingkuh Logo"
             className="w-[50px] sm:w-[70px] md:w-[80px] lg:w-[90px]"
-          />
+          /> */}
           <p className="text-white font-inter fw-semibold text-[30px] md:text-[40px] lg:text-[50px]">
             SELINGKUH
           </p>
