@@ -66,8 +66,10 @@ export default function Page() {
       <Toaster />
       <div className="w-full max-w-md lg:7/12 md:w-screen">
         <CardHeader>
-          <CardTitle className="text-white">Login</CardTitle>
-          <div className="text-white">
+          <CardTitle className="font-extrabold text-white text-2xl">
+            Login
+          </CardTitle>
+          <div className="text-white text-sm">
             Login dulu yuk sebelum memulai chat dengan selingkuhan kamu
           </div>
         </CardHeader>
@@ -100,7 +102,7 @@ export default function Page() {
               </div>
             </div>
             <Button
-              className="my-3 w-full md:w-auto "
+              className="my-3 w-full md:w-auto text-white btn-selingkuh-dark hover:bg-selingkuh-dark-500"
               onClick={async (e) => {
                 e.preventDefault();
                 handleSubmit.mutateAsync(login);
