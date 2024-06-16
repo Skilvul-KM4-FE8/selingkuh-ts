@@ -62,7 +62,7 @@ export default function Page() {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-selingkuh">
+    <div className="flex items-center justify-center min-h-screen bg-selingkuh-dark">
       <Toaster />
       <div className="w-full max-w-md lg:7/12 md:w-screen">
         <CardHeader>
@@ -75,7 +75,9 @@ export default function Page() {
           <form className="">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Email</Label>
+                <Label className="text-white" htmlFor="name">
+                  Email
+                </Label>
                 <Input
                   type="email"
                   placeholder="Masukkan Email kamu"
@@ -85,7 +87,9 @@ export default function Page() {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">Password</Label>
+                <Label className="text-white" htmlFor="password">
+                  Password
+                </Label>
                 <Input
                   type="password"
                   placeholder="Masukkan Password kamu"
