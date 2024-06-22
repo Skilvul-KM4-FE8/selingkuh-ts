@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 bg-transparent shadow-md dark:bg-zinc-800/50 z-50">
+      <nav className="top-0 left-0 w-full flex items-center justify-between p-4 bg-transparent shadow-md dark:bg-zinc-800/50 z-50">
         <div className="flex items-center gap-10">
           <Image src={Logo} alt="Selingkuh" className="w-10 h-10" />
           <div className="hidden md:flex items-center gap-10">

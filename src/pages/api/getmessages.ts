@@ -11,7 +11,10 @@ const libsql = createClient({
 const adapter = new PrismaLibSQL(libsql);
 const prisma = new PrismaClient({ adapter });
 
-export default async function getMessages(req: NextApiRequest, res: NextApiResponse) {
+export default async function getMessages(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const messages = await prisma.message.findMany();
   // console.log(messages)
   res.status(200).json(messages);
