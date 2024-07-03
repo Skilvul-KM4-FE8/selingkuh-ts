@@ -16,11 +16,10 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/api/register";
 import Image from "next/image";
-import selingkuhLogo from "./../../images/selingkuh_logo.png"
+import selingkuhLogo from "./../../images/selingkuh_logo.png";
 import Swal from "sweetalert2";
 
 const Register: FC = () => {
-
   const [account, setAccount] = useState<registerUserInterface>({
     username: "",
     password: "",
@@ -56,7 +55,7 @@ const Register: FC = () => {
       username: "",
       password: "",
       email: "",
-      re_password: ""
+      re_password: "",
     });
     setTouched({
       username: false,
@@ -72,18 +71,19 @@ const Register: FC = () => {
       Swal.fire({
         title: "Success!",
         text: data.message,
-        icon: "success"
+        icon: "success",
       });
       resetAccount();
     },
     onError: (error: any) => {
-      const errorMessage = error.response?.data?.message || "Registration failed";
+      const errorMessage =
+        error.response?.data?.message || "Registration failed";
       Swal.fire({
         title: "Error",
         text: errorMessage,
         icon: "error",
         color: "white",
-        background: "#4E3ABA"
+        background: "#4E3ABA",
       });
     },
   });
@@ -92,16 +92,20 @@ const Register: FC = () => {
     setCheck(!check);
   };
 
-  const isNull = account.username.length == 0 || account.email.length == 0 || account.password.length == 0;
-  const btnRegisClass = isNull ? "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark cursor-not-allowed" : "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark";
+  const isNull =
+    account.username.length == 0 ||
+    account.email.length == 0 ||
+    account.password.length == 0;
+  const btnRegisClass = isNull
+    ? "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark cursor-not-allowed"
+    : "text-white font-semibold font-inter w-[100%] py-2 rounded-lg btn-selingkuh-dark";
 
   return (
     <div className="bg-selingkuh-dark w-screen">
       {handleSubmit.isPending ? (
         <div className="z-10 bg-slate-950 bg-opacity-90 absolute flex justify-center items-center top-0 bottom-0 left-0 right-0 w-screen h-screen">
           <div className="font-extrabold text-white text-5xl animate-pulse flex">
-            L
-            <p className="animate-spin">O</p>
+            L<p className="animate-spin">O</p>
             ading
             <p className="animate-bounce">...</p>
           </div>
@@ -110,8 +114,14 @@ const Register: FC = () => {
 
       <div className="flex justify-center items-center h-screen flex-col">
         <div className="h-1/4 flex justify-center items-center w-screen">
-          <Image src={selingkuhLogo} alt="Selingkuh Logo" className="w-[50px] sm:w-[70px] md:w-[80px] lg:w-[90px]" />
-          <p className="text-white font-inter fw-semibold text-[30px] md:text-[40px] lg:text-[50px]">SELINGKUH</p>
+          <Image
+            src={selingkuhLogo}
+            alt="Selingkuh Logo"
+            className="w-[50px] sm:w-[70px] md:w-[80px] lg:w-[90px]"
+          />
+          <p className="text-white font-inter fw-semibold text-[30px] md:text-[40px] lg:text-[50px]">
+            SELINGKUH
+          </p>
         </div>
 
         <div className="inline-block w-screen px-6 sm:w-screen md:w-9/12 lg:w-4/12">
@@ -131,7 +141,13 @@ const Register: FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.username && (account.username.length < 6) ? <p className="text-red-500">Username must be at least 6 characters</p> : (touched.username && account.username.length >= 6 ? <p className="text-green-500">Username is valid</p> : null)}
+              {touched.username && account.username.length < 6 ? (
+                <p className="text-red-500">
+                  Username must be at least 6 characters
+                </p>
+              ) : touched.username && account.username.length >= 6 ? (
+                <p className="text-green-500">Username is valid</p>
+              ) : null}
               <input
                 required
                 type="email"
@@ -142,7 +158,9 @@ const Register: FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.email && account.email.length === 0 ? <p className="text-red-500">Email is required</p> : null}
+              {touched.email && account.email.length === 0 ? (
+                <p className="text-red-500">Email is required</p>
+              ) : null}
               <input
                 required
                 type="password"
@@ -153,7 +171,9 @@ const Register: FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.password && account.password.length === 0 ? <p className="text-red-500">Password is required</p> : null}
+              {touched.password && account.password.length === 0 ? (
+                <p className="text-red-500">Password is required</p>
+              ) : null}
               <input
                 required
                 type="password"
@@ -164,22 +184,57 @@ const Register: FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.re_password && (account.password !== account.re_password) ? <p className="text-red-500">Password doesn't match</p> : null}
+              {touched.re_password &&
+              account.password !== account.re_password ? (
+                <p className="text-red-500">Password doesn't match</p>
+              ) : null}
               <label className="text-white" htmlFor="accept_terms">
-                <input type="checkbox" className="me-3 leading-3 border-0" name="accept_terms" id="accept_terms" onClick={handleCheck} />Accept terms and condition
+                <input
+                  type="checkbox"
+                  className="me-3 leading-3 border-0"
+                  name="accept_terms"
+                  id="accept_terms"
+                  onClick={handleCheck}
+                />
+                Accept terms and condition
               </label>
-              <button onClick={async e => { e.preventDefault(); handleSubmit.mutateAsync(account) }} disabled={handleSubmit.isPending || isNull} className={btnRegisClass}>
-                {handleSubmit.isPending ?
-                  (<svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v)C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.939l3-2.647z"></path>
-                  </svg>)
-                  : null
-                }
+              <button
+                onClick={async (e) => {
+                  e.preventDefault();
+                  handleSubmit.mutateAsync(account);
+                }}
+                disabled={handleSubmit.isPending || isNull}
+                className={btnRegisClass}
+              >
+                {handleSubmit.isPending ? (
+                  <svg
+                    className="animate-spin h-5 w-5 mr-3 text-white"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v)C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.939l3-2.647z"
+                    ></path>
+                  </svg>
+                ) : null}
                 Register
               </button>
               <div>
-                <p className="font-inter text-white text-center">Already registered? <Link className="font-extrabold" href={"/login"}>Login</Link></p>
+                <p className="font-inter text-white text-center">
+                  Already registered?{" "}
+                  <Link className="font-extrabold" href={"/login"}>
+                    Login
+                  </Link>
+                </p>
               </div>
             </div>
           </form>
@@ -187,6 +242,6 @@ const Register: FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Register;
