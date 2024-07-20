@@ -54,6 +54,7 @@ export default function Page() {
       resetAccount();
       toast.success("Login Berhasil");
       router.push("/dashboard/contact");
+      localStorage.setItem("setlogged", "true");
     },
     onError: (error: Error) => {
       // alert("Login Gagal: " + error.message);
