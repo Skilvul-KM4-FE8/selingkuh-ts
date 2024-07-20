@@ -1,74 +1,103 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Drawer,
-  // DrawerOverlay,
+  DrawerClose,
   DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
-  // DrawerClose,
+  DrawerTitle,
+  DrawerTrigger,
 } from "../ui/drawer";
 import { Button } from "../ui/button";
 import Logo from "../../../public/logoipsum-223.svg";
 import Image from "next/image";
 
 export default function Navbar() {
-  const isLogged = localStorage.getItem("setlogged");
-
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    setIsLogged(!!localStorage.getItem("setlogged"));
+  }, []);
 
   return (
-    <div>
-      <div className="top-0 left-0 w-full flex items-center  p-4 bg-transparent shadow-md dark:bg-zinc-800/50 z-50">
-        <div>
-          <Image
-            src={Logo}
-            alt="Selingkuh"
-            className="  justify-start w-10 h-10"
-          />
-        </div>
-        <div className="flex items-center justify-end gap-10">
-          {isLogged ? (
-            <div className="md:flex items-center gap-10 ">
-              <a
-                href="/contact"
-                className="text-white dark:text-gray-400 text-black"
-              >
-                Contact
-              </a>
-              <a
-                href="/chat"
-                className="text-white dark:text-gray-400 text-black"
-              >
-                Chat
-              </a>
-            </div>
-          ) : (
-            <div className="md:flex items-center gap-4">
-              <a
-                href="/login"
-                className="text-white dark:text-gray-400 text-black"
-              >
-                Login
-              </a>
-              <Button className="btn-selingkuh">
-                <a
-                  href="/register"
-                  className="text-white dark:text-gray-400 text-black"
-                >
-                  Register
-                </a>
-              </Button>
-            </div>
-          )}
-        </div>
-
-        {/* <div className="md:hidden flex items-center">
-          <Button onClick={() => setDrawerOpen(true)} className="btn-selingkuh">
-            Menu
-          </Button>
-        </div> */}
+    <div className=" top-0 left-0 w-full flex items-center p-4 bg-transparent shadow-md dark:bg-zinc-800/50 z-50">
+      <div className="flex items-center">
+        <Image src={Logo} alt="Selingkuh" className="w-10 h-10" />
       </div>
+      <div className="flex-grow flex items-center justify-end gap-10">
+        {isLogged ? (
+          <div className="md:flex items-center gap-10">
+            <a href="/contact" className="text-white dark:text-gray-400">
+              Contact
+            </a>
+            <a href="/chat" className="text-white dark:text-gray-400">
+              Chat
+            </a>
+          </div>
+        ) : (
+          <div className="md:flex items-center gap-4">
+            <a href="/login" className="text-white dark:text-gray-400">
+              Login
+            </a>
+            <Button className="btn-selingkuh">
+              <a href="/register" className="text-white dark:text-gray-400">
+                Register
+              </a>
+            </Button>
+          </div>
+        )}
+      </div>
+
+      {/* Uncomment this if you need the drawer for mobile view  */}
+      <div className="md:hidden flex items-center">
+        <Button onClick={() => setDrawerOpen(true)} className="btn-selingkuh">
+          Menu
+        </Button>
+      </div>
+
+      <Drawer open={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
+        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader className="justify-center items-center">
+            <DrawerTitle>Navigation?</DrawerTitle>
+            <DrawerDescription>
+              Click one for your destination
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            {isLogged ? (
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <Button href="/contact" className="btn-selingkuh">
+                  Contact
+                </Button>
+                <Button href="/chat" className="btn-selingkuh">
+                  Chat
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button href="/login" className="btn-selingkuh">
+                  Login
+                </Button>
+                <Button className="btn-selingkuh ">
+                  <Button href="/register" className="btn-selingkuh">
+                    Register
+                  </Button>
+                </Button>
+              </div>
+            )}{" "}
+            <DrawerClose>
+              <Button variant="outline" onClick={() => setDrawerOpen(false)}>
+                Cancel
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
