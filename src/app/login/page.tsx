@@ -53,7 +53,7 @@ export default function Page() {
       console.log({ data });
       resetAccount();
       toast.success("Login Berhasil");
-      router.push("/dashboard");
+      router.push("/dashboard/contact");
     },
     onError: (error: Error) => {
       // alert("Login Gagal: " + error.message);
