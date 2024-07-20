@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import {
   Drawer,
   DrawerClose,
@@ -14,6 +15,7 @@ import {
 import { Button } from "../ui/button";
 import Logo from "../../../public/logoipsum-223.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -62,7 +64,7 @@ export default function Navbar() {
       <Drawer open={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
         <DrawerTrigger>Open</DrawerTrigger>
         <DrawerContent>
-          <DrawerHeader className="justify-center items-center">
+          <DrawerHeader className=" flex flex-col justify-center items-center">
             <DrawerTitle>Navigation?</DrawerTitle>
             <DrawerDescription>
               Click one for your destination
@@ -71,23 +73,40 @@ export default function Navbar() {
           <DrawerFooter>
             {isLogged ? (
               <div className="flex items-center justify-center gap-2 mb-6">
-                <Button href="/contact" className="btn-selingkuh">
+                <Link
+                  href="dashboard/contact"
+                  onClick={() => setDrawerOpen(false)}
+                  className="btn-selingkuh py-2 px-4"
+                >
                   Contact
-                </Button>
-                <Button href="/chat" className="btn-selingkuh">
+                </Link>
+
+                <Link
+                  onClick={() => setDrawerOpen(false)}
+                  className="btn-selingkuh py-2 px-4"
+                  href="dashboard/chat"
+                >
                   Chat
-                </Button>
+                </Link>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <Button href="/login" className="btn-selingkuh">
+              <div className="flex items-center justify-center gap-2">
+                <Link
+                  href="/login"
+                  onClick={() => {
+                    setDrawerOpen(false);
+                  }}
+                  className="btn-selingkuh py-2 px-4"
+                >
                   Login
-                </Button>
-                <Button className="btn-selingkuh ">
-                  <Button href="/register" className="btn-selingkuh">
-                    Register
-                  </Button>
-                </Button>
+                </Link>
+                <Link
+                  onClick={() => setDrawerOpen(false)}
+                  href="/register"
+                  className="btn-selingkuh py-2 px-4"
+                >
+                  Register
+                </Link>
               </div>
             )}{" "}
             <DrawerClose>
