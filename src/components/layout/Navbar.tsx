@@ -25,6 +25,10 @@ export default function Navbar() {
     setIsLogged(!!localStorage.getItem("setlogged"));
   }, []);
 
+  const setLogout = () => {
+    localStorage.removeItem("setlogged");
+  };
+
   return (
     <div className=" top-0 left-0 w-full flex items-center p-4 bg-transparent shadow-md dark:bg-zinc-800/50 z-50">
       <div className="flex items-center">
@@ -62,7 +66,6 @@ export default function Navbar() {
       </div>
 
       <Drawer open={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerTrigger>Open</DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className=" flex flex-col justify-center items-center">
             <DrawerTitle>Navigation?</DrawerTitle>
@@ -87,6 +90,13 @@ export default function Navbar() {
                   href="dashboard/chat"
                 >
                   Chat
+                </Link>
+                <Link
+                  onClick={() => setLogout()}
+                  href="/"
+                  className="btn-selingkuh py-2 px-4"
+                >
+                  Logout
                 </Link>
               </div>
             ) : (
